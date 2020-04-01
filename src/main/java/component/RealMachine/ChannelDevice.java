@@ -14,4 +14,8 @@ public class ChannelDevice {
 
     private ChannelDevice() {}
 
+    public void initializeRegisters(){
+
+    }
+
 }
