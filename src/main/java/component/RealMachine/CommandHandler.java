@@ -16,21 +16,25 @@ public class CommandHandler {
                     {
                         parameterNumber++;
                     }
+                    break;
                 case "MTB":
                     for(int i=1;i<=1;i++)
                     {
                         parameterNumber++;
                     }
+                    break;
                 case "ATM":
                     for(int i=1;i<=1;i++)
                     {
                         parameterNumber++;
                     }
+                    break;
                 case "BTM":
                     for(int i=1;i<=1;i++)
                     {
                         parameterNumber++;
                     }
+                    break;
                  //Arithmetical commands
                 case "AD":
                     System.out.println(allCommands.get(h)+" ");
@@ -39,6 +43,7 @@ public class CommandHandler {
                         System.out.println(allParameters.get(parameterNumber));
                         parameterNumber++;
                     }
+                    break;
                 case "SB":
                     System.out.println(allCommands.get(h)+" ");
                     for(int i=1;i<=2;i++)
@@ -46,40 +51,43 @@ public class CommandHandler {
                         System.out.println(allParameters.get(parameterNumber));
                         parameterNumber++;
                     }
+                    break;
                 case "CM":
                     for(int i=1;i<=2;i++)
                     {
                         parameterNumber++;
                     }
+                    break;
                 //Control commands
                 case "SJMP":
-                    ;
+                    break;
                 //Conditional control commands
                 case "IJMP":
-                    ;
+                    break;
                 case "BJMP":
-                    ;
+                    break;
                 case "AJMP":
                     System.out.println(allCommands.get(h));
-                    ;
+                    break;
                 //Input commands
                 case "GET":
                     parameterNumber++;
-                    ;
+                    break;
                 //Output commands
                 case "WRT":
                     parameterNumber++;
-                    ;
+                    break;
                 //Program executing commands
                 case "LOAD":
-                    ;
+                    break;
                 case "LD":
                     for(int i=1;i<=2;i++)
                     {
                         parameterNumber++;
                     }
+                    break;
                 case "HALT":
-                        ;
+                    break;
             }
         }
 
