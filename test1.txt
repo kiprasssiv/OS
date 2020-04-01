@@ -1,0 +1,3 @@
+ADD ax bx
+SUM cx
+JBZ dx
