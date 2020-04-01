@@ -1,5 +1,7 @@
 package component.RealMachine;
 
+import model.Register;
+
 public class ChannelDevice {
 
     public static ChannelDevice channelDevice = null;

@@ -1,86 +1,95 @@
 package component.VirtualMachine;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.util.ArrayList;
+import component.RealMachine.Processor;
+import model.Register;
+import model.RegisterType;
 
 public class CommandHandler {
-    public int parameterNumber;
-    public String firstRegister, secondRegister;
-    public CommandHandler(){
-        parameterNumber = 0;
-    }
-    public void commandSeparator(ArrayList<String> allCommands, ArrayList<String> allParameters){
-        for(int h=0;h<allCommands.size();h++){
-            switch(allCommands.get(h)){
-                //Memory commands
-                case "MTA":
-                    firstRegister = allParameters.get(parameterNumber);
-                    parameterNumber++;
-                    break;
-                case "MTB":
-                    firstRegister = allParameters.get(parameterNumber);
-                    parameterNumber++;
-                    break;
-                case "ATM":
-                    firstRegister = allParameters.get(parameterNumber);
-                    parameterNumber++;
-                    break;
-                case "BTM":
-                    firstRegister = allParameters.get(parameterNumber);
-                    parameterNumber++;
-                    break;
-                 //Arithmetical commands
-                case "AD":
-                    firstRegister = allParameters.get(parameterNumber);
-                    parameterNumber++;
-                    secondRegister = allParameters.get(parameterNumber);
-                    parameterNumber++;
-                    break;
-                case "SB":
-                    firstRegister = allParameters.get(parameterNumber);
-                    parameterNumber++;
-                    secondRegister = allParameters.get(parameterNumber);
-                    parameterNumber++;
-                    break;
-                case "CM":
-                    firstRegister = allParameters.get(parameterNumber);
-                    parameterNumber++;
-                    secondRegister = allParameters.get(parameterNumber);
-                    parameterNumber++;
-                    break;
-                //Control commands
-                case "SJMP":
-                    break;
-                //Conditional control commands
-                case "IJMP":
-                    break;
-                case "BJMP":
-                    break;
-                case "AJMP":
 
-                    break;
-                //Input commands
-                case "GET":
-                    parameterNumber++;
-                    break;
-                //Output commands
-                case "WRT":
-                    parameterNumber++;
-                    break;
-                //Program executing commands
-                case "LOAD":
-                    break;
-                case "LD":
-                    firstRegister = allParameters.get(parameterNumber);
-                    parameterNumber++;
-                    secondRegister = allParameters.get(parameterNumber);
-                    parameterNumber++;
-                    break;
-                case "HALT":
-                    break;
-            }
+    private static CommandHandler commandHandler = null;
+
+    private Processor processor = null;
+
+    public CommandHandler() {
+        processor = Processor.getInstance();
+    }
+
+    public static CommandHandler getInstance() {
+        if (commandHandler == null) {
+            return new CommandHandler();
         }
+        return commandHandler;
+    }
+
+
+    public void handleMTA() {
+
+    }
+
+    public void handleMTB() {
+
+    }
+
+    public void handleBTM() {
+
+    }
+
+    public void handleATM() {
+
+    }
+
+    public void handleAD(RegisterType reg1, RegisterType reg2) {
+        Register register1 = processor.getRegister(reg1);
+        Register register2 = processor.getRegister(reg2);
+
+    }
+
+    public void handleSB(RegisterType reg1, RegisterType reg2) {
+        Register register1 = processor.getRegister(reg1);
+        Register register2 = processor.getRegister(reg2);
+
+    }
+
+    public void handleCM(RegisterType reg1, RegisterType reg2) {
+        Register register1 = processor.getRegister(reg1);
+        Register register2 = processor.getRegister(reg2);
+    }
+
+    public void handleSJMP() {
+
+    }
+
+    public void handleIJMP() {
+
+    }
+
+    public void handleBJMP() {
+
+    }
+
+    public void handleAJMP() {
+
+    }
+
+    public void handleGET(RegisterType reg) {
+        Register register = processor.getRegister(reg);
+    }
+
+    public void handleWRT(RegisterType reg) {
+        Register register = processor.getRegister(reg);
+    }
+
+    public void handleLOAD() {
+
+    }
+
+    public void handleLD(RegisterType reg1, RegisterType reg2) {
+        Register register1 = processor.getRegister(reg1);
+        Register register2 = processor.getRegister(reg2);
+
+    }
+
+    public void handleHALT() {
 
     }
 }
