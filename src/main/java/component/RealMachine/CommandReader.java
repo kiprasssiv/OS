@@ -24,31 +24,31 @@ public class CommandReader {
             String lineOfCode;
             while ((lineOfCode = reader.readLine()) != null) {
                 readingCommand = true;
+
                 for(int i=0;i<lineOfCode.length();i++){
                         if(readingCommand) {
                             if(lineOfCode.charAt(i) != ' '){
                                 command += lineOfCode.charAt(i);
+                                if(i == lineOfCode.length()-1){
+                                    allCommands.add(command);
+                                    command = "";
+                                }
                             }
                             else{
                                 readingCommand = false;
                                 allCommands.add(command);
                                 command = "";
                             }
-                            if(i == lineOfCode.length()-1){
-                                allParameters.add(parameter);
-                                command = "";
-                            }
                         }
                         else{
                                 if(lineOfCode.charAt(i) != ' '){
                                     parameter+=lineOfCode.charAt(i);
+                                    if(i+1 == lineOfCode.length()){
+                                        allParameters.add(parameter);
+                                        parameter = "";
+                                    }
                                 }
-
                                 else{
-                                    allParameters.add(parameter);
-                                    parameter = "";
-                                }
-                                if(i == lineOfCode.length()-1){
                                     allParameters.add(parameter);
                                     parameter = "";
                                 }
