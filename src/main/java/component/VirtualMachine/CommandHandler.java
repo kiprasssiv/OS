@@ -29,7 +29,7 @@ public class CommandHandler {
                 case "BTM":
                     firstRegister = allParameters.get(parameterNumber);
                     parameterNumber++;
-                    break;                    break;
+                    break;
                  //Arithmetical commands
                 case "AD":
                     firstRegister = allParameters.get(parameterNumber);
