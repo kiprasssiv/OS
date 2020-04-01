@@ -1,6 +1,7 @@
 package component.VirtualMachine;
 
 import component.RealMachine.InputDevice;
+import component.Tools.CodeFileReader;
 
 public class VirtualMachine {
     String fileName;
@@ -9,7 +10,7 @@ public class VirtualMachine {
         InputDevice inputReader = new InputDevice();
         //fileName = inputReader.readingFileInput();
         fileName = "test1.txt";
-        CommandHandler.CommandReader commandReader = new CommandHandler.CommandReader();
-        commandReader.readingProgram(fileName);
+        CodeFileReader reader = new CodeFileReader();
+        reader.readingProgram(fileName);
     }
 }
