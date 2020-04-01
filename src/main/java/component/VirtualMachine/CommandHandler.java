@@ -15,36 +15,27 @@ public class CommandHandler {
             switch(allCommands.get(h)){
                 //Memory commands
                 case "MTA":
-                    for(int i=1;i<=1;i++)
-                    {
-                        parameterNumber++;
-                    }
+                    firstRegister = allParameters.get(parameterNumber);
+                    parameterNumber++;
                     break;
                 case "MTB":
-                    for(int i=1;i<=1;i++)
-                    {
-                        parameterNumber++;
-                    }
+                    firstRegister = allParameters.get(parameterNumber);
+                    parameterNumber++;
                     break;
                 case "ATM":
-                    for(int i=1;i<=1;i++)
-                    {
-                        parameterNumber++;
-                    }
+                    firstRegister = allParameters.get(parameterNumber);
+                    parameterNumber++;
                     break;
                 case "BTM":
-                    for(int i=1;i<=1;i++)
-                    {
-                        parameterNumber++;
-                    }
-                    break;
+                    firstRegister = allParameters.get(parameterNumber);
+                    parameterNumber++;
+                    break;                    break;
                  //Arithmetical commands
                 case "AD":
                     firstRegister = allParameters.get(parameterNumber);
                     parameterNumber++;
                     secondRegister = allParameters.get(parameterNumber);
                     parameterNumber++;
-
                     break;
                 case "SB":
                     firstRegister = allParameters.get(parameterNumber);
