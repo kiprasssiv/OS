@@ -25,24 +25,26 @@ public class CommandHandler {
     public void handleVT(RegisterType reg, String value){
         int decimal = Integer.parseInt(value, 16);
         BigInteger bigInt = BigInteger.valueOf(decimal);
-        Processor.TI.singleValue--;
+        processor.TI.singleValue--;
         processor.getRegister(reg).value = bigInt.toByteArray();
 
     }
 
 
     public void handleMTA() {
+        processor.TI.singleValue--;
     }
 
     public void handleMTB() {
+        processor.TI.singleValue--;
     }
 
     public void handleBTM() {
-
+        processor.TI.singleValue--;
     }
 
     public void handleATM() {
-
+        processor.TI.singleValue--;
     }
 
     public void handleAD(RegisterType reg1, RegisterType reg2) {
@@ -50,7 +52,7 @@ public class CommandHandler {
         int register2 = new BigInteger(processor.getRegister(reg2).value).intValue();
         register1 = register1 + register2;
         BigInteger bigInt = BigInteger.valueOf(register1);
-
+        processor.TI.singleValue--;
         processor.getRegister(reg1).value = bigInt.toByteArray();
 
     }
@@ -60,7 +62,7 @@ public class CommandHandler {
         int register2 = new BigInteger(processor.getRegister(reg2).value).intValue();
         register1 = register1 - register2;
         BigInteger bigInt = BigInteger.valueOf(register1);
-
+        processor.TI.singleValue--;
         processor.getRegister(reg1).value = bigInt.toByteArray();
     }
 
@@ -77,38 +79,42 @@ public class CommandHandler {
         if(register1==register2){
             result = 2;
         }
+        processor.TI.singleValue-=2;
         processor.CF.singleValue = (byte)result;
     }
 
     public void handleSJMP() {
-
+        processor.TI.singleValue--;
     }
 
     public void handleIJMP() {
-
+        processor.TI.singleValue--;
     }
 
     public void handleBJMP() {
-
+        processor.TI.singleValue--;
     }
 
     public void handleAJMP() {
-
+        processor.TI.singleValue--;
     }
 
     public void handleGET(RegisterType reg) {
+        processor.TI.singleValue-=3;
         Register register = processor.getRegister(reg);
     }
 
     public void handleWRT(RegisterType reg) {
+        processor.TI.singleValue-=3;
         Register register = processor.getRegister(reg);
     }
 
     public void handleLOAD() {
-
+        processor.TI.singleValue-=2;
     }
 
     public void handleLD(RegisterType reg1, RegisterType reg2) {
+        processor.TI.singleValue-=2;
         Register register1 = processor.getRegister(reg1);
         Register register2 = processor.getRegister(reg2);
 
