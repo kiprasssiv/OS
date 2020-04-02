@@ -1,4 +1,4 @@
-package component.RealMachine;
+package model.RealMachine;
 
 public class Device {
     private final int type;

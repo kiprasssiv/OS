@@ -1,12 +1,11 @@
 package component.VirtualMachine;
 
 import component.RealMachine.Processor;
-import model.Command;
-import model.Register;
+import model.Operation;
 import model.RegisterType;
 
-import java.util.ArrayList;
-import static model.Command.VT;
+import java.util.List;
+
 import static model.Command.AD;
 import static model.Command.AJMP;
 import static model.Command.ATM;
@@ -22,114 +21,117 @@ import static model.Command.MTA;
 import static model.Command.MTB;
 import static model.Command.SB;
 import static model.Command.SJMP;
+import static model.Command.VT;
 import static model.Command.WRT;
 
 public class CommandProcessor {
     Processor processor;
-    public int parameterNumber;
-    public String reg1,reg2,reg,value;
-    Register registers = null;
 
     public CommandProcessor() {
-        parameterNumber = 0;
         this.processor = Processor.getInstance();
     }
 
-    public void separate(ArrayList<Command> allCommands, ArrayList<String> allParameters) {
-        for (int h = 0; h < allCommands.size(); h++) {
-            switch (allCommands.get(h)) {
+    public void separate(List<Operation> operations) throws Exception {
+        while (processor.CC.getIntValue() < operations.size()) {
+            Operation operation = operations.get(processor.CC.getIntValue());
+
+            switch (operation.command) {
                 //Putting values to registers
                 case VT:
-                    reg = allParameters.get(parameterNumber);
-                    parameterNumber++;
-                    value = allParameters.get(parameterNumber);
-                    parameterNumber++;
-                    VT.handle(RegisterType.valueOf(reg), value);
+                    VT.handle(
+                        RegisterType.valueOf(operation.parameters.get(0)),
+                        operation.parameters.get(1)
+                    );
+                    processor.updateCounts(-1);
                     break;
-
                 //Memory commands
-                case MTA:
-                    reg = allParameters.get(parameterNumber);
-                    parameterNumber++;
-                    MTA.handle(value);
+                case MTA: // TODO: implement this stuff
+//                    reg = operation.parameters.get(0);
+//                    MTA.handle(value);
+//                    processor.updateCounts(-1);
                     break;
-                case MTB:
-                    reg = allParameters.get(parameterNumber);
-                    parameterNumber++;
-                    MTB.handle(value);
+                case MTB: // TODO: implement this stuff
+//                    reg = operation.parameters.get(0);
+//                    MTB.handle(value);
+//                    processor.updateCounts(-1);
                     break;
-                case ATM:
-                    reg = allParameters.get(parameterNumber);
-                    parameterNumber++;
-                    ATM.handle();
+                case ATM: // TODO: implement this stuff
+//                    reg = operation.parameters.get(0);
+//                    ATM.handle();
+//                    processor.updateCounts(-1);
                     break;
-                case BTM:
-                    reg1 = allParameters.get(parameterNumber);
-                    parameterNumber++;
-                    BTM.handle();
+                case BTM: // TODO: implement this stuff
+//                    reg1 = operation.parameters.get(0);
+//                    BTM.handle();
+//                    processor.updateCounts(-1);
                     break;
                 //Arithmetical commands
                 case AD:
-                    reg1 = allParameters.get(parameterNumber);
-                    parameterNumber++;
-                    reg2 = allParameters.get(parameterNumber);
-                    parameterNumber++;
-                    AD.handle(RegisterType.valueOf(reg1), RegisterType.valueOf(reg2));
+                    AD.handle(
+                        RegisterType.valueOf(operation.parameters.get(0)),
+                        RegisterType.valueOf(operation.parameters.get(1))
+                    );
+                    processor.updateCounts(-1);
                     break;
                 case SB:
-                    reg1 = allParameters.get(parameterNumber);
-                    parameterNumber++;
-                    reg2 = allParameters.get(parameterNumber);
-                    parameterNumber++;
-                    SB.handle(RegisterType.valueOf(reg1), RegisterType.valueOf(reg2));
+                    SB.handle(
+                        RegisterType.valueOf(operation.parameters.get(0)),
+                        RegisterType.valueOf(operation.parameters.get(0))
+                    );
+                    processor.updateCounts(-1);
                     break;
                 case CM:
-                    reg1 = allParameters.get(parameterNumber);
-                    parameterNumber++;
-                    reg2 = allParameters.get(parameterNumber);
-                    parameterNumber++;
-                    CM.handle(RegisterType.valueOf(reg1), RegisterType.valueOf(reg2));
+                    CM.handle(
+                        RegisterType.valueOf(operation.parameters.get(0)),
+                        RegisterType.valueOf(operation.parameters.get(1))
+                    );
+                    processor.updateCounts(-2);
                     break;
                 //Control commands
                 case SJMP:
                     SJMP.handle();
+                    processor.updateCounts(-1);
                     break;
                 //Conditional control commands
                 case IJMP:
                     IJMP.handle();
+                    processor.updateCounts(-1);
                     break;
                 case BJMP:
                     BJMP.handle();
+                    processor.updateCounts(-1);
                     break;
                 case AJMP:
                     AJMP.handle();
+                    processor.updateCounts(-1);
                     break;
                 //Input commands
-                case GET:
-                    reg = allParameters.get(parameterNumber);
-                    parameterNumber++;
-                    GET.handle(RegisterType.valueOf(reg));
+                case GET: // TODO: implement this stuff
+                    GET.handle(RegisterType.valueOf(operation.parameters.get(0)));
+                    processor.updateCounts(-3);
                     break;
                 //Output commands
-                case WRT:
-                    reg = allParameters.get(parameterNumber);
-                    parameterNumber++;
-                    WRT.handle(RegisterType.valueOf(reg));
+                case WRT: // TODO: implement this stuff
+                    WRT.handle(RegisterType.valueOf(operation.parameters.get(1)));
+                    processor.updateCounts(-3);
                     break;
                 //Program executing commands
-                case LOAD:
+                case LOAD: // TODO: implement this stuff
                     LOAD.handle();
+                    processor.updateCounts(-2);
                     break;
-                case LD:
-                    reg1 = allParameters.get(parameterNumber);
-                    parameterNumber++;
-                    reg2 = allParameters.get(parameterNumber);
-                    parameterNumber++;
-                    LD.handle(RegisterType.valueOf(reg1), RegisterType.valueOf(reg2));
+                case LD: // TODO: implement this stuff
+                    LD.handle(
+                        RegisterType.valueOf(operation.parameters.get(0)),
+                        RegisterType.valueOf(operation.parameters.get(1))
+                    );
+                    processor.updateCounts(-2);
                     break;
-                case HALT:
+                case HALT: // TODO: implement this stuff
                     HALT.handle();
                     break;
+                default:
+                    throw new Exception("No such command " + operation.command);
             }
 
         }

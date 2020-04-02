@@ -1,12 +1,12 @@
 package component.RealMachine;
 
+import component.util.ByteArrayUtils;
+import model.RealMachine.Device;
 import model.RealMachine.ProcessorMode;
 import model.Register;
 import model.RegisterType;
 
-import java.lang.reflect.Array;
 import java.lang.reflect.Field;
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,37 +18,41 @@ public class Processor {
 
     public static List<Device> devices;
 
-    public static Register AX, BX, CX, DX, PTR, SF, CF, CC, TI, WM, PI, SI;
+    public Register AX, BX, CX, DX, PTR, SF, CF, CC, TI, WM, PI, SI, SP;
 
     public static Processor getInstance() {
         if (processor == null) {
-            return new Processor();
+            processor = new Processor();
         }
         return processor;
     }
 
     private Processor() {
-        this.devices = new ArrayList<>();
-        this.mode = ProcessorMode.SUPERVISOR;
+        devices = new ArrayList<>();
+        mode = ProcessorMode.SUPERVISOR;
         initializeRegisters();
     }
 
-    private Processor(ProcessorMode mode) { this.mode = mode; }
+    private Processor(ProcessorMode mode) {
+        this.mode = mode;
+    }
 
     public void initializeRegisters() {
-        this.AX = new Register(4, "AX");
-        this.BX = new Register(4,"BX");
-        this.CX = new Register(4,"CX");
-        this.DX = new Register(4,"DX");
-        this.PTR = new Register(4,"PTR"); //nzn
-        this.SF = new Register(1,"SF");
-        this.CF = new Register(1,"CF");
-        this.CC = new Register(2,"CC");
-        this.TI = new Register(2,"TI");
-        this.WM = new Register(1,"WM");
-        this.PI = new Register(2,"PI");
-        this.SI = new Register(2,"SI"); // kanalu irenginys
+        AX = new Register(4);
+        BX = new Register(4);
+        CX = new Register(4);
+        DX = new Register(4);
+        PTR = new Register(4); //nzn
+        SF = new Register(1);
+        CF = new Register(1);
+        CC = new Register(4);
+        TI = new Register(2);
+        WM = new Register(1);
+        PI = new Register(2);
+        SI = new Register(2); // kanalu irenginys
+        SP = new Register(4);
     }
+
     public Register getRegister(RegisterType type) {
         try {
             Field field = Processor.class.getDeclaredField(type.toString());
@@ -60,7 +64,19 @@ public class Processor {
             throw new IllegalStateException("Failed to access field " + type + " after making it accessible", e);
         }
     }
-    public String getRegisterValues(){
-        return "AX: "+AX.value+ " " + "BX: "+BX.value+ " " + "CX: "+ CX.value+ " " +"DX: "+DX.value;
+
+
+    public void updateCounts(int TI) {
+        CC.value = ByteArrayUtils.add(CC.value, 1);
+        this.TI.value = ByteArrayUtils.add(this.TI.value, TI);
+    }
+
+    public void updateCounts(int CC, int TI) {
+        this.CC.value = ByteArrayUtils.add(this.CC.value, CC);
+        this.TI.value = ByteArrayUtils.add(this.TI.value, TI);
+    }
+
+    public int compareAXwithBX() {
+        return ByteArrayUtils.compare(AX.value, BX.value);
     }
 }

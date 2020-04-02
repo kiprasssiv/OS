@@ -16,8 +16,9 @@ public class Memory {
     private byte[] memory;
 
     public static Memory getInstance() {
-        if (globalMemory == null)
+        if (globalMemory == null) {
             globalMemory = new Memory();
+        }
         return globalMemory;
     }
 

@@ -12,6 +12,7 @@ public class VirtualMachine {
         InputDevice inputReader = new InputDevice();
         //fileName = inputReader.readingFileInput();
         fileName = "test1.txt";
+        
         FileProcessor reader = new FileProcessor();
         reader.readingProgram(fileName);
     }

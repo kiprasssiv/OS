@@ -10,9 +10,8 @@ public class ChannelDevice {
 
     public static ChannelDevice getInstance() {
         if (channelDevice == null) {
-            return new ChannelDevice();
+            channelDevice = new ChannelDevice();
         }
-
         return channelDevice;
     }
 

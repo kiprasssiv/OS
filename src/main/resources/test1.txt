@@ -1,0 +1,6 @@
+VT SP 3
+VT AX 1
+VT CX 1
+VT BX 5
+AD AX CX
+AJMP

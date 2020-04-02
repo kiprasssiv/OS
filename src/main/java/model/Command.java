@@ -53,6 +53,4 @@ public enum Command {
     public void handle(RegisterType arg1, RegisterType arg2) {}
 
     public void handle(RegisterType arg1, String arg2) {}
-
-    public void handle(String arg1, String arg2) {}
 }
