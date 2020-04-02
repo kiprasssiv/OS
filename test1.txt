@@ -1,3 +1,5 @@
-AD ax bx
-SB cx dx
+VT AX 5
+VT DX 5
+AD AX DX
+SB CX DX
 AJMP

@@ -1,10 +1,12 @@
 package component.VirtualMachine;
 
+import component.RealMachine.Processor;
 import model.Command;
+import model.Register;
 import model.RegisterType;
 
 import java.util.ArrayList;
-
+import static model.Command.VT;
 import static model.Command.AD;
 import static model.Command.AJMP;
 import static model.Command.ATM;
@@ -23,58 +25,71 @@ import static model.Command.SJMP;
 import static model.Command.WRT;
 
 public class CommandProcessor {
+    Processor processor;
     public int parameterNumber;
-    public String firstRegister, secondRegister;
+    public String reg1,reg2,reg,value;
+    Register registers = null;
 
     public CommandProcessor() {
         parameterNumber = 0;
+        this. processor = processor.getInstance();
     }
 
     public void separate(ArrayList<Command> allCommands, ArrayList<String> allParameters) {
         for (int h = 0; h < allCommands.size(); h++) {
             switch (allCommands.get(h)) {
+                //Putting values to registers
+                case VT:
+                    reg = allParameters.get(parameterNumber);
+                    parameterNumber++;
+                    value = allParameters.get(parameterNumber);
+                    parameterNumber++;
+                    VT.handle(RegisterType.valueOf(reg), value);
+                    break;
+
                 //Memory commands
                 case MTA:
-                    firstRegister = allParameters.get(parameterNumber);
+                    reg = allParameters.get(parameterNumber);
                     parameterNumber++;
                     MTA.handle();
                     break;
                 case MTB:
-                    firstRegister = allParameters.get(parameterNumber);
+                    reg = allParameters.get(parameterNumber);
                     parameterNumber++;
                     MTB.handle();
                     break;
                 case ATM:
-                    firstRegister = allParameters.get(parameterNumber);
+                    reg = allParameters.get(parameterNumber);
                     parameterNumber++;
                     ATM.handle();
                     break;
                 case BTM:
-                    firstRegister = allParameters.get(parameterNumber);
+                    reg1 = allParameters.get(parameterNumber);
                     parameterNumber++;
                     BTM.handle();
                     break;
                 //Arithmetical commands
                 case AD:
-                    firstRegister = allParameters.get(parameterNumber);
+                    reg1 = allParameters.get(parameterNumber);
                     parameterNumber++;
-                    secondRegister = allParameters.get(parameterNumber);
+                    reg2 = allParameters.get(parameterNumber);
                     parameterNumber++;
-                    AD.handle(RegisterType.valueOf(firstRegister), RegisterType.valueOf(secondRegister));
+                    System.out.println("BEFORE SUM: " + processor.getRegister(RegisterType.valueOf(reg1)).value[0]);
+                    AD.handle(RegisterType.valueOf(reg1), RegisterType.valueOf(reg2));
                     break;
                 case SB:
-                    firstRegister = allParameters.get(parameterNumber);
+                    reg1 = allParameters.get(parameterNumber);
                     parameterNumber++;
-                    secondRegister = allParameters.get(parameterNumber);
+                    reg2 = allParameters.get(parameterNumber);
                     parameterNumber++;
-                    SB.handle(RegisterType.valueOf(firstRegister), RegisterType.valueOf(secondRegister));
+                    SB.handle(RegisterType.valueOf(reg1), RegisterType.valueOf(reg2));
                     break;
                 case CM:
-                    firstRegister = allParameters.get(parameterNumber);
+                    reg1 = allParameters.get(parameterNumber);
                     parameterNumber++;
-                    secondRegister = allParameters.get(parameterNumber);
+                    reg2 = allParameters.get(parameterNumber);
                     parameterNumber++;
-                    CM.handle(RegisterType.valueOf(firstRegister), RegisterType.valueOf(secondRegister));
+                    CM.handle(RegisterType.valueOf(reg1), RegisterType.valueOf(reg2));
                     break;
                 //Control commands
                 case SJMP:
@@ -92,26 +107,26 @@ public class CommandProcessor {
                     break;
                 //Input commands
                 case GET:
-                    firstRegister = allParameters.get(parameterNumber);
+                    reg = allParameters.get(parameterNumber);
                     parameterNumber++;
-                    GET.handle(RegisterType.valueOf(firstRegister));
+                    GET.handle(RegisterType.valueOf(reg));
                     break;
                 //Output commands
                 case WRT:
-                    firstRegister = allParameters.get(parameterNumber);
+                    reg = allParameters.get(parameterNumber);
                     parameterNumber++;
-                    WRT.handle(RegisterType.valueOf(firstRegister));
+                    WRT.handle(RegisterType.valueOf(reg));
                     break;
                 //Program executing commands
                 case LOAD:
                     LOAD.handle();
                     break;
                 case LD:
-                    firstRegister = allParameters.get(parameterNumber);
+                    reg1 = allParameters.get(parameterNumber);
                     parameterNumber++;
-                    secondRegister = allParameters.get(parameterNumber);
+                    reg2 = allParameters.get(parameterNumber);
                     parameterNumber++;
-                    LD.handle(RegisterType.valueOf(firstRegister), RegisterType.valueOf(secondRegister));
+                    LD.handle(RegisterType.valueOf(reg1), RegisterType.valueOf(reg2));
                     break;
                 case HALT:
                     HALT.handle();

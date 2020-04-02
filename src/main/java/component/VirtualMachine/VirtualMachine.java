@@ -3,6 +3,7 @@ package component.VirtualMachine;
 import component.RealMachine.InputDevice;
 import component.FileProcessor;
 
+
 public class VirtualMachine {
     String fileName;
     public VirtualMachine(){

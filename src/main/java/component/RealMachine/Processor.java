@@ -34,18 +34,18 @@ public class Processor {
     private Processor(ProcessorMode mode) { this.mode = mode; }
 
     public void initializeRegisters() {
-        AX = new Register(4);
-        BX = new Register(4);
-        CX = new Register(4);
-        DX = new Register(4);
-        PTR = new Register(4); //nzn
-        SF = new Register(1);
-        CF = new Register(1);
-        CC = new Register(2);
-        TI = new Register(2);
-        WM = new Register(1);
-        PI = new Register(2);
-        SI = new Register(2); // kanalu irenginys
+        AX = new Register(4, "AX");
+        BX = new Register(4,"BX");
+        CX = new Register(4,"CX");
+        DX = new Register(4,"DX");
+        PTR = new Register(4,"PTR"); //nzn
+        SF = new Register(1,"SF");
+        CF = new Register(1,"CF");
+        CC = new Register(2,"CC");
+        TI = new Register(2,"TI");
+        WM = new Register(1,"WM");
+        PI = new Register(2,"PI");
+        SI = new Register(2,"SI"); // kanalu irenginys
     }
 
     public Register getRegister(RegisterType type) {

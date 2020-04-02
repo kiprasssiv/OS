@@ -18,7 +18,6 @@ public class Memory {
     public static Memory getInstance() {
         if (globalMemory == null)
             globalMemory = new Memory();
-
         return globalMemory;
     }
 
