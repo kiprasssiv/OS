@@ -4,6 +4,7 @@ import model.RealMachine.ProcessorMode;
 import model.Register;
 import model.RegisterType;
 
+import java.lang.reflect.Array;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -60,6 +61,6 @@ public class Processor {
         }
     }
     public String getRegisterValues(){
-        return "AX: "+Integer.toString(AX.value)+ " " + "BX: "+Integer.toString(BX.value)+ " " + "CX: "+Integer.toString(CX.value)+ " " +"DX: "+Integer.toString(DX.value)+ " ";
+        return "AX: "+AX.value+ " " + "BX: "+BX.value+ " " + "CX: "+ CX.value+ " " +"DX: "+DX.value;
     }
 }

@@ -4,6 +4,8 @@ import component.RealMachine.Processor;
 import model.Register;
 import model.RegisterType;
 
+import java.math.BigInteger;
+
 public class CommandHandler {
 
     private static CommandHandler commandHandler = null;
@@ -21,11 +23,12 @@ public class CommandHandler {
         return commandHandler;
     }
     public void handleVT(RegisterType reg, String value){
+        String text = "FF";
+        int decimal = Integer.parseInt(text, 16);
+        BigInteger bigInt = BigInteger.valueOf(decimal);
 
-        processor.getRegister(reg).value = Integer.parseInt(value);
+        processor.getRegister(reg).value = bigInt.toByteArray();
 
-
-        int sum = 1;
     }
 
 
@@ -47,25 +50,39 @@ public class CommandHandler {
     }
 
     public void handleAD(RegisterType reg1, RegisterType reg2) {
-        //System.out.println(processor.getRegister(reg1));
-        //processor.getRegister(reg1).value[0] = processor.getRegister(reg1).value[0] + processor.getRegister(reg2).value[0];
+        int register1 = new BigInteger(processor.getRegister(reg1).value).intValue();
+        int register2 = new BigInteger(processor.getRegister(reg2).value).intValue();
+        register1 = register1 + register2;
+        BigInteger bigInt = BigInteger.valueOf(register1);
 
-        //sum = processor.getRegister(reg1).value[0];
-        //sum = (byte)(sum + processor.getRegister(reg2).value[0]);
-        //processor.getRegister(reg1).value[0]= (byte)processor.getRegister(reg1).value[0] + (byte)processor.getRegister(reg2).value[0];
+        processor.getRegister(reg1).value = bigInt.toByteArray();
 
-        //System.out.println(processor.getRegister(reg2).value[0]);
-        //System.out.println(processor.getRegister(reg2).name);
-        System.out.println(processor.getRegisterValues());
     }
 
     public void handleSB(RegisterType reg1, RegisterType reg2) {
-      //  processor.getRegister(reg1).value = processor.getRegister(reg1).value - processor.getRegister(reg2);
+        int register1 = new BigInteger(processor.getRegister(reg1).value).intValue();
+        int register2 = new BigInteger(processor.getRegister(reg2).value).intValue();
+        register1 = register1 - register2;
+        BigInteger bigInt = BigInteger.valueOf(register1);
+
+        processor.getRegister(reg1).value = bigInt.toByteArray();
     }
 
     public void handleCM(RegisterType reg1, RegisterType reg2) {
-        Register register1 = processor.getRegister(reg1);
-        Register register2 = processor.getRegister(reg2);
+        int register1 = new BigInteger(processor.getRegister(reg1).value).intValue();
+        int register2 = new BigInteger(processor.getRegister(reg2).value).intValue();
+        int result = -1;
+        if (register1<register2){
+            result = 0;
+        }
+        if(register1>register2){
+            result = 1;
+        }
+        if(register1==register2){
+            result = 2;
+        }
+        processor.CF.singleValue = (byte)result;
+
     }
 
     public void handleSJMP() {
