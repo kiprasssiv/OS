@@ -11,7 +11,7 @@ public class CommandHandler {
     private Processor processor = null;
 
     public CommandHandler() {
-        processor = Processor.getInstance();
+        this.processor = Processor.getInstance();
     }
 
     public static CommandHandler getInstance() {
@@ -20,10 +20,12 @@ public class CommandHandler {
         }
         return commandHandler;
     }
-    public void handleVT(RegisterType reg, String value) {
-        processor.getRegister(reg).value[0] = (byte)Integer.parseInt(value);
-        System.out.println(processor.getRegister(reg).name + "   " + processor.getRegister(reg).value[0]);
+    public void handleVT(RegisterType reg, String value){
 
+        processor.getRegister(reg).value = Integer.parseInt(value);
+
+
+        int sum = 1;
     }
 
 
@@ -45,18 +47,16 @@ public class CommandHandler {
     }
 
     public void handleAD(RegisterType reg1, RegisterType reg2) {
-       // processor.getRegister(reg1).value[] = processor.getRegister(reg1).value + processor.getRegister(reg2);
-        int sum;
-        byte b1;
-        byte b2;
-        b1 = processor.getRegister(reg1).value[0];
-        b2 = processor.getRegister(reg2).value[0];
-        sum = b1 + b2;
+        //System.out.println(processor.getRegister(reg1));
+        //processor.getRegister(reg1).value[0] = processor.getRegister(reg1).value[0] + processor.getRegister(reg2).value[0];
+
         //sum = processor.getRegister(reg1).value[0];
         //sum = (byte)(sum + processor.getRegister(reg2).value[0]);
         //processor.getRegister(reg1).value[0]= (byte)processor.getRegister(reg1).value[0] + (byte)processor.getRegister(reg2).value[0];
-        System.out.println(processor.getRegister(reg2).value[0]);
 
+        //System.out.println(processor.getRegister(reg2).value[0]);
+        //System.out.println(processor.getRegister(reg2).name);
+        System.out.println(processor.getRegisterValues());
     }
 
     public void handleSB(RegisterType reg1, RegisterType reg2) {

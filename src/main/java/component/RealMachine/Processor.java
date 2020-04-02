@@ -5,6 +5,7 @@ import model.Register;
 import model.RegisterType;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,20 +35,19 @@ public class Processor {
     private Processor(ProcessorMode mode) { this.mode = mode; }
 
     public void initializeRegisters() {
-        AX = new Register(4, "AX");
-        BX = new Register(4,"BX");
-        CX = new Register(4,"CX");
-        DX = new Register(4,"DX");
-        PTR = new Register(4,"PTR"); //nzn
-        SF = new Register(1,"SF");
-        CF = new Register(1,"CF");
-        CC = new Register(2,"CC");
-        TI = new Register(2,"TI");
-        WM = new Register(1,"WM");
-        PI = new Register(2,"PI");
-        SI = new Register(2,"SI"); // kanalu irenginys
+        this.AX = new Register(4, "AX");
+        this.BX = new Register(4,"BX");
+        this.CX = new Register(4,"CX");
+        this.DX = new Register(4,"DX");
+        this.PTR = new Register(4,"PTR"); //nzn
+        this.SF = new Register(1,"SF");
+        this.CF = new Register(1,"CF");
+        this.CC = new Register(2,"CC");
+        this.TI = new Register(2,"TI");
+        this.WM = new Register(1,"WM");
+        this.PI = new Register(2,"PI");
+        this.SI = new Register(2,"SI"); // kanalu irenginys
     }
-
     public Register getRegister(RegisterType type) {
         try {
             Field field = Processor.class.getDeclaredField(type.toString());
@@ -58,5 +58,8 @@ public class Processor {
         } catch (IllegalAccessException e) {
             throw new IllegalStateException("Failed to access field " + type + " after making it accessible", e);
         }
+    }
+    public String getRegisterValues(){
+        return "AX: "+Integer.toString(AX.value)+ " " + "BX: "+Integer.toString(BX.value)+ " " + "CX: "+Integer.toString(CX.value)+ " " +"DX: "+Integer.toString(DX.value)+ " ";
     }
 }

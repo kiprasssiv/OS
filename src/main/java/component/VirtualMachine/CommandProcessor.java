@@ -32,7 +32,7 @@ public class CommandProcessor {
 
     public CommandProcessor() {
         parameterNumber = 0;
-        this. processor = processor.getInstance();
+        this.processor = Processor.getInstance();
     }
 
     public void separate(ArrayList<Command> allCommands, ArrayList<String> allParameters) {
@@ -74,7 +74,6 @@ public class CommandProcessor {
                     parameterNumber++;
                     reg2 = allParameters.get(parameterNumber);
                     parameterNumber++;
-                    System.out.println("BEFORE SUM: " + processor.getRegister(RegisterType.valueOf(reg1)).value[0]);
                     AD.handle(RegisterType.valueOf(reg1), RegisterType.valueOf(reg2));
                     break;
                 case SB:

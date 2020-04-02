@@ -2,6 +2,7 @@ package component.VirtualMachine;
 
 import component.RealMachine.InputDevice;
 import component.FileProcessor;
+import component.RealMachine.Processor;
 
 
 public class VirtualMachine {
