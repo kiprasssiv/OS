@@ -23,22 +23,18 @@ public class CommandHandler {
         return commandHandler;
     }
     public void handleVT(RegisterType reg, String value){
-        String text = "FF";
-        int decimal = Integer.parseInt(text, 16);
+        int decimal = Integer.parseInt(value, 16);
         BigInteger bigInt = BigInteger.valueOf(decimal);
-
+        Processor.TI.singleValue--;
         processor.getRegister(reg).value = bigInt.toByteArray();
 
     }
 
 
     public void handleMTA() {
-
-
     }
 
     public void handleMTB() {
-
     }
 
     public void handleBTM() {
@@ -82,7 +78,6 @@ public class CommandHandler {
             result = 2;
         }
         processor.CF.singleValue = (byte)result;
-
     }
 
     public void handleSJMP() {

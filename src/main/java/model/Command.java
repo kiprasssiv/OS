@@ -6,7 +6,7 @@ import java.nio.ByteBuffer;
 
 public enum Command {
     VT("VT") { @Override public void handle(RegisterType arg1, String arg2) { CommandHandler.getInstance().handleVT(arg1, arg2); } },
-    MTA("MTA") { @Override public void handle() { CommandHandler.getInstance().handleMTA(); } },
+    MTA("MTA") { @Override public void handle() { CommandHandler.getInstance().handleMTA();} },
     MTB("MTB") { @Override public void handle() { CommandHandler.getInstance().handleMTB(); } },
     ATM("ATM") { @Override public void handle() { CommandHandler.getInstance().handleATM(); } },
     BTM("BTM") { @Override public void handle() { CommandHandler.getInstance().handleBTM(); } },
@@ -48,8 +48,11 @@ public enum Command {
 
     public void handle(RegisterType arg) {}
 
+    public void handle(String arg1) {}
+
     public void handle(RegisterType arg1, RegisterType arg2) {}
 
     public void handle(RegisterType arg1, String arg2) {}
+
     public void handle(String arg1, String arg2) {}
 }

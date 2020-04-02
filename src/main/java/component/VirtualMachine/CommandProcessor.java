@@ -51,12 +51,12 @@ public class CommandProcessor {
                 case MTA:
                     reg = allParameters.get(parameterNumber);
                     parameterNumber++;
-                    MTA.handle();
+                    MTA.handle(value);
                     break;
                 case MTB:
                     reg = allParameters.get(parameterNumber);
                     parameterNumber++;
-                    MTB.handle();
+                    MTB.handle(value);
                     break;
                 case ATM:
                     reg = allParameters.get(parameterNumber);
