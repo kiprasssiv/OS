@@ -2,15 +2,15 @@ package component.VirtualMachine;
 
 public class VirtualProcessor {
     /*
-    public VirtualProcessor(VirtualMemory memory) {
-        super(memory);
+    public VirtualProcessor(VirtualMemory realMemory) {
+        super(realMemory);
     }
 
     public void loadInstructionsFromFile(String fileName) {
-        memory.loadProgram(fileName);
+        realMemory.loadProgram(fileName);
     }
 
     String getCommand() {
-        return new String(memory.getCodeWord(processor.IC.getValue()));
+        return new String(realMemory.getCodeWord(processor.IC.getValue()));
     }*/
 }

@@ -1,6 +1,6 @@
 package component;
 
-import component.RealMachine.Memory;
+import component.RealMachine.RealMemory;
 import component.VirtualMachine.CommandProcessor;
 import model.Command;
 import model.Operation;
@@ -31,14 +31,14 @@ public class FileProcessor {
         try {
             File file = getFileFromResources(fileName);
             byte[] program = Files.readAllBytes(file.toPath());
-            Memory.getInstance().putIntoMemory(program);
+            RealMemory.getInstance().putIntoMemory(program);
         } catch (IOException ex) {
             System.out.println("Failed to read program from file, exeption: " + ex.getMessage());
         }
     }
 
     public List<Operation> processProgramToCommands() {
-        String codeSegment = new String(Arrays.copyOfRange(Memory.getInstance().ram, 0, Memory.occupiedRam));
+        String codeSegment = new String(Arrays.copyOfRange(RealMemory.getInstance().ram, 0, RealMemory.occupiedRam));
         return processCodeSegmentToOperations(codeSegment);
     }
 

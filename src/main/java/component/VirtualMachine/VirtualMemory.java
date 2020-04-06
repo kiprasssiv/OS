@@ -1,6 +1,5 @@
 package component.VirtualMachine;
 
-import component.RealMachine.Memory;
 import component.RealMachine.Processor;
 
 import java.nio.ByteBuffer;
@@ -25,10 +24,11 @@ public class VirtualMemory {
 
     public VirtualMemory() {
         processor = Processor.getInstance();
-        processor.TI.value = ByteBuffer.allocate(2).putInt(20).array();
+//        processor.TI.value = ByteBuffer.allocate(2).putInt(20).array();
         pagingTable = PagingTable.getInstance();
 
     }
+
     public static VirtualMemory getInstance() {
         if (virtualMemory == null) {
             virtualMemory = new VirtualMemory();

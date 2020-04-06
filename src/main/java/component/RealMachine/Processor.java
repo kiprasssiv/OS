@@ -38,19 +38,19 @@ public class Processor {
     }
 
     public void initializeRegisters() {
-        AX = new Register(4);
-        BX = new Register(4);
-        CX = new Register(4);
-        DX = new Register(4);
-        PTR = new Register(4); //nzn
+        AX = new Register();
+        BX = new Register();
+        CX = new Register();
+        DX = new Register();
+        PTR = new Register(); //nzn
         SF = new Register(1);
         CF = new Register(1);
-        CC = new Register(4);
+        CC = new Register();
         TI = new Register(2);
         WM = new Register(1);
         PI = new Register(2);
         SI = new Register(2); // kanalu irenginys
-        SP = new Register(4);
+        SP = new Register();
     }
 
     public Register getRegister(RegisterType type) {
