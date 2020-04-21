@@ -3,25 +3,66 @@ package model;
 import component.VirtualMachine.CommandHandler;
 
 import java.nio.ByteBuffer;
+import java.util.List;
 
 public enum Command {
-    VT("VT") { @Override public void handle(RegisterType arg1, String arg2) { CommandHandler.getInstance().handleVT(arg1, arg2); } },
-    MTA("MTA") { @Override public void handle() { CommandHandler.getInstance().handleMTA();} },
-    MTB("MTB") { @Override public void handle() { CommandHandler.getInstance().handleMTB(); } },
-    ATM("ATM") { @Override public void handle() { CommandHandler.getInstance().handleATM(); } },
-    BTM("BTM") { @Override public void handle() { CommandHandler.getInstance().handleBTM(); } },
-    AD("AD") { @Override public void handle(RegisterType arg1, RegisterType arg2) { CommandHandler.getInstance().handleAD(arg1, arg2); } },
-    SB("SB") { @Override public void handle(RegisterType arg1, RegisterType arg2) { CommandHandler.getInstance().handleSB(arg1, arg2); } },
-    CM("CM") { @Override public void handle(RegisterType arg1, RegisterType arg2) { CommandHandler.getInstance().handleCM(arg1, arg2); } },
-    SJMP("SJMP") { @Override public void handle() { CommandHandler.getInstance().handleSJMP(); } },
-    IJMP("IJMP") { @Override public void handle() { CommandHandler.getInstance().handleIJMP(); } },
-    BJMP("BJMP") { @Override public void handle() { CommandHandler.getInstance().handleBJMP(); } },
-    AJMP("AJMP") { @Override public void handle() { CommandHandler.getInstance().handleAJMP(); } },
-    GET("GET") { @Override public void handle(RegisterType arg) { CommandHandler.getInstance().handleGET(arg); } },
-    WRT("WRT") { @Override public void handle(RegisterType arg) { CommandHandler.getInstance().handleWRT(arg); } },
-    LOAD("LOAD") { @Override public void handle() { CommandHandler.getInstance().handleLOAD(); } },
-    LD("LD") { @Override public void handle(RegisterType arg1, RegisterType arg2) { CommandHandler.getInstance().handleLD(arg1, arg2); } },
-    HALT("HALT") { @Override public void handle() { CommandHandler.getInstance().handleHALT(); } };
+    VT("VT") {
+        @Override public void handle(List<String> parameters) {
+            CommandHandler.getInstance().handleVT(RegisterType.valueOf(parameters.get(0)), parameters.get(1));
+        }
+    },
+    MTA("MTA") { @Override public void handle(List<String> parameters) { CommandHandler.getInstance().handleMTA();} },
+    MTB("MTB") { @Override public void handle(List<String> parameters) { CommandHandler.getInstance().handleMTB(); } },
+    ATM("ATM") { @Override public void handle(List<String> parameters) { CommandHandler.getInstance().handleATM(); } },
+    BTM("BTM") { @Override public void handle(List<String> parameters) { CommandHandler.getInstance().handleBTM(); } },
+    AD("AD") {
+        @Override public void handle(List<String> parameters) {
+            CommandHandler.getInstance().handleAD(
+                RegisterType.valueOf(parameters.get(0)),
+                RegisterType.valueOf(parameters.get(1))
+            );
+        }
+    },
+    SB("SB") {
+        @Override public void handle(List<String> parameters) {
+            CommandHandler.getInstance().handleSB(
+                RegisterType.valueOf(parameters.get(0)),
+                RegisterType.valueOf(parameters.get(1))
+            );
+        }
+    },
+    CM("CM") {
+        @Override public void handle(List<String> parameters) {
+            CommandHandler.getInstance().handleCM(
+                RegisterType.valueOf(parameters.get(0)),
+                RegisterType.valueOf(parameters.get(1))
+            );
+        }
+    },
+    SJMP("SJMP") { @Override public void handle(List<String> parameters) { CommandHandler.getInstance().handleSJMP(); } },
+    IJMP("IJMP") { @Override public void handle(List<String> parameters) { CommandHandler.getInstance().handleIJMP(); } },
+    BJMP("BJMP") { @Override public void handle(List<String> parameters) { CommandHandler.getInstance().handleBJMP(); } },
+    AJMP("AJMP") { @Override public void handle(List<String> parameters) { CommandHandler.getInstance().handleAJMP(); } },
+    GET("GET") {
+        @Override public void handle(List<String> parameters) {
+            CommandHandler.getInstance().handleGET(RegisterType.valueOf(parameters.get(0)));
+        }
+    },
+    WRT("WRT") {
+        @Override public void handle(List<String> parameters) {
+            CommandHandler.getInstance().handleWRT(RegisterType.valueOf(parameters.get(0)));
+        }
+    },
+    LOAD("LOAD") { @Override public void handle(List<String> parameters) { CommandHandler.getInstance().handleLOAD(); } },
+    LD("LD") {
+        @Override public void handle(List<String> parameters) {
+            CommandHandler.getInstance().handleLD(
+                RegisterType.valueOf(parameters.get(0)),
+                RegisterType.valueOf(parameters.get(1))
+            );
+        }
+    },
+    HALT("HALT") { @Override public void handle(List<String> parameters) { CommandHandler.getInstance().handleHALT(); } };
 
     private int value;
 
@@ -44,13 +85,5 @@ public enum Command {
             return (ByteBuffer.wrap(sb.toString().getBytes()).getInt() & 0xffffffff);
     }
 
-    public void handle() {}
-
-    public void handle(RegisterType arg) {}
-
-    public void handle(String arg1) {}
-
-    public void handle(RegisterType arg1, RegisterType arg2) {}
-
-    public void handle(RegisterType arg1, String arg2) {}
+    public void handle(List<String> parameters) {}
 }

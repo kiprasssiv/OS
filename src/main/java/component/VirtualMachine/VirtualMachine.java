@@ -1,19 +1,23 @@
 package component.VirtualMachine;
 
-import component.RealMachine.InputDevice;
 import component.FileProcessor;
-import component.RealMachine.Processor;
+import model.Operation;
+
+import java.util.List;
 
 
 public class VirtualMachine {
     String fileName;
-    public VirtualMachine(){
+    CommandProcessor commandProcessor = new CommandProcessor();
+
+    public VirtualMachine() {
         System.out.println("Enter file name");
-        InputDevice inputReader = new InputDevice();
-        //fileName = inputReader.readingFileInput();
         fileName = "test1.txt";
-        
+
         FileProcessor reader = new FileProcessor();
-        reader.readingProgram(fileName);
+        reader.readProgram(fileName);
+        List<Operation> operations = reader.processProgramToCommands();
+        commandProcessor.execute(operations);
+
     }
 }
