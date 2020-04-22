@@ -27,4 +27,7 @@ public class Register {
         }
         return value[0] & 0xFF;
     }
+    public void setValue(byte[] value){
+        this.value = value;
+    }
 }
